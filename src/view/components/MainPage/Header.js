@@ -17,8 +17,10 @@ const Header = (props) => {
 
   return (
     <Wrapper>
-      <Logo>CookBook</Logo>
-      <Navigation />
+      <FlexContainer>
+        <Logo>CookBook</Logo>
+        <Navigation />
+      </FlexContainer>
       <Searcher>
         <Title>Type something for searching</Title>
         <Description>You can find here different cool recipes</Description>
@@ -46,6 +48,28 @@ const Wrapper = styled.header`
   @media (min-width: 768px) {
     padding: 0 24px;
   }
+
+  @media (min-width: 992px) {
+    padding: 0 15px;
+  }
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    padding: 0 24px;
+    width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 960px;
+  }
 `;
 
 const Logo = styled.h1`
@@ -71,8 +95,12 @@ const Searcher = styled.div`
   @media (min-width: 768px) {
     margin: 0 auto;
     margin-top: 75px;
-    margin-bottom: 45px;
+    margin-bottom: 55px;
     width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    width: 960px;
   }
 `;
 

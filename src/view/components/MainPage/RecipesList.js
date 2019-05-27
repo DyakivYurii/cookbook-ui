@@ -49,17 +49,43 @@ const Wrapper = styled.header`
   padding: 0 15px;
   color: #303030;
   background-color: #fff;
+
+  @media (min-width: 768px) {
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    padding: 0 15px;
+    width: 960px;
+  }
 `;
 
 const List = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 `;
 
 const Item = styled.li`
   margin: 15px 0;
   padding: 10px 0;
+
+  @media (min-width: 768px) {
+    width: 340px;
+  }
+
+  @media (min-width: 992px) {
+    width: 300px;
+  }
 `;
 
 const ItemTitle = styled.h2`

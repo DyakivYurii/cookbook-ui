@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Navigation = (props) => {
@@ -6,11 +6,18 @@ const Navigation = (props) => {
 
   const changeNavigationState = () => {
     setNavigationOpen(!navigationOpen);
-    console.log(navigationOpen);
   };
 
   return (
     <Wrapper>
+      <Desctop>
+        <DesctopList open={navigationOpen}>
+          <DesctopItem>Home</DesctopItem>
+          <DesctopItem>Sign In</DesctopItem>
+          <DesctopItem>Sign Up</DesctopItem>
+        </DesctopList>
+      </Desctop>
+
       <Mobile>
         <Title open={navigationOpen}>Menu</Title>
         <Burger
@@ -34,6 +41,17 @@ export default Navigation;
 
 const Wrapper = styled.nav``;
 
+const Desctop = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: block;
+  }
+`;
+
+const DesctopList = styled.ul``;
+
+const DesctopItem = styled.li``;
+
 const Mobile = styled.div`
   position: absolute;
   top: 0;
@@ -41,6 +59,10 @@ const Mobile = styled.div`
   width: 100%;
   background-color: #fff;
   box-shadow: 0 1px 3px 0 #30303020;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const Title = styled.h2`

@@ -1,46 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import Button from '../Controllers/Button';
 
-const fakeRecipe = {
-  id: 1,
-  title: 'This is my new cool recipe with changed',
-  text:
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  date_creation: '2019-05-25T18:10:00.075Z',
-  author_id: 1
-};
-
 const RecipesList = (props) => {
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/recipes`)
+      .then((result) => {
+        return setRecipes(result.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Wrapper>
-      <List>
-        <Item key={fakeRecipe.id}>
-          <ItemTitle>{fakeRecipe.title}</ItemTitle>
-          <ItemDate>Created at: {fakeRecipe.date_creation}</ItemDate>
-          <ItemContent>{fakeRecipe.text}</ItemContent>
-          <ButtonContainer>
-            <Button type="button">More</Button>
-          </ButtonContainer>
-        </Item>
-        <Item key={fakeRecipe.id}>
-          <ItemTitle>{fakeRecipe.title}</ItemTitle>
-          <ItemDate>Created at: {fakeRecipe.date_creation}</ItemDate>
-          <ItemContent>{fakeRecipe.text}</ItemContent>
-          <ButtonContainer>
-            <Button type="button">More</Button>
-          </ButtonContainer>
-        </Item>
-        <Item key={fakeRecipe.id}>
-          <ItemTitle>{fakeRecipe.title}</ItemTitle>
-          <ItemDate>Created at: {fakeRecipe.date_creation}</ItemDate>
-          <ItemContent>{fakeRecipe.text}</ItemContent>
-          <ButtonContainer>
-            <Button type="button">More</Button>
-          </ButtonContainer>
-        </Item>
-      </List>
+      {recipes.length ? (
+        <List>
+          {recipes.map((currentRecipe) => {
+            return (
+              <Item key={currentRecipe.id}>
+                <ItemTitle>{currentRecipe.title}</ItemTitle>
+                <ItemDate>Created at: {currentRecipe.date_creation}</ItemDate>
+                <ItemContent>{currentRecipe.text}</ItemContent>
+                <ButtonContainer>
+                  <Button type="button">More</Button>
+                </ButtonContainer>
+              </Item>
+            );
+          })}
+        </List>
+      ) : (
+        <p>Loading</p>
+      )}
     </Wrapper>
   );
 };

@@ -1,18 +1,44 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getAllRecipes } from '../../store/recipes/actions';
 
 import Header from '../components/MainPage/Header';
 import RecipesList from '../components/MainPage/RecipesList';
 import Footer from '../components/Footer';
 
-const MainPage = () => {
-  // console.log(`This is api url`, process.env.REACT_APP_API_URL);
+const MainPage = (props) => {
+  console.log(`My props`, props);
   return (
     <React.Fragment>
-      <Header />
-      <RecipesList />
+      <Header recipes={props.recipes} getAllRecipes={props.getAllRecipes} />
+      <RecipesList
+        recipes={props.recipes}
+        getAllRecipes={props.getAllRecipes}
+      />
       <Footer />
     </React.Fragment>
   );
 };
 
-export default MainPage;
+MainPage.propTypes = {
+  history: PropTypes.object.isRequired,
+  recipes: PropTypes.object.isRequired,
+  getAllRecipes: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => {
+  return {
+    recipes: state.recipes
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getAllRecipes }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainPage);

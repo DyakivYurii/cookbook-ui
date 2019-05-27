@@ -1,27 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import axios from 'axios';
 
 import Button from '../Controllers/Button';
 
 const RecipesList = (props) => {
-  const [recipes, setRecipes] = useState([]);
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/recipes`)
-      .then((result) => {
-        return setRecipes(result.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    props.getAllRecipes();
   }, []);
 
   return (
     <Wrapper>
-      {recipes.length ? (
+      {props.recipes.recipes.length ? (
         <List>
-          {recipes.map((currentRecipe) => {
+          {props.recipes.recipes.map((currentRecipe) => {
             return (
               <Item key={currentRecipe.id}>
                 <ItemTitle>{currentRecipe.title}</ItemTitle>
@@ -39,6 +31,11 @@ const RecipesList = (props) => {
       )}
     </Wrapper>
   );
+};
+
+RecipesList.propTypes = {
+  recipes: PropTypes.object.isRequired,
+  getAllRecipes: PropTypes.func.isRequired
 };
 
 export default RecipesList;

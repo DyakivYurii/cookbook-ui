@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Navigation from '../Navigation';
@@ -12,7 +13,8 @@ const Header = (props) => {
   };
 
   useEffect(() => {
-    console.log(`search value =`, searchValue);
+    // const result = props.getAllRecipes();
+    // console.log(result);
   }, [searchValue]);
 
   return (
@@ -31,6 +33,11 @@ const Header = (props) => {
       </Searcher>
     </Wrapper>
   );
+};
+
+Header.propTypes = {
+  // recipes: PropTypes.object.isRequired,
+  // getAllRecipes: PropTypes.func.isRequired
 };
 
 export default Header;

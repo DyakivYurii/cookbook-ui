@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import Navigation from './Navigation';
+import Navigation from '../Navigation';
 import Input from '../Controllers/Input';
 
 const Header = (props) => {
@@ -17,10 +17,7 @@ const Header = (props) => {
 
   return (
     <Wrapper>
-      <FlexContainer>
-        <Logo>CookBook</Logo>
-        <Navigation />
-      </FlexContainer>
+      <Navigation />
       <Searcher>
         <Title>Type something for searching</Title>
         <Description>You can find here different cool recipes</Description>
@@ -52,35 +49,6 @@ const Wrapper = styled.header`
   @media (min-width: 992px) {
     padding: 0 15px;
   }
-`;
-
-const FlexContainer = styled.div`
-  padding-top: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (min-width: 768px) {
-    padding: 0 24px;
-    width: 720px;
-  }
-
-  @media (min-width: 992px) {
-    margin: 0 auto;
-    padding: 0 15px;
-    padding-top: 20px;
-    width: 960px;
-  }
-`;
-
-const Logo = styled.h1`
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 300;
-  color: #fafafa;
 `;
 
 const Searcher = styled.div`

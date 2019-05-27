@@ -86,7 +86,7 @@ const Item = styled.li`
   }
 
   @media (min-width: 992px) {
-    width: 300px;
+    width: 290px;
   }
 `;
 

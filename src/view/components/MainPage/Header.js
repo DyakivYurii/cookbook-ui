@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+
+import Navigation from './Navigation';
+import Input from '../Controllers/Input';
 
 const Header = (props) => {
   const [searchValue, setSearchValue] = useState('');
@@ -8,6 +11,10 @@ const Header = (props) => {
     setSearchValue(event.target.value);
   };
 
+  useEffect(() => {
+    console.log(`search value =`, searchValue);
+  }, [searchValue]);
+
   return (
     <Wrapper>
       <Logo>CookBook</Logo>
@@ -15,7 +22,7 @@ const Header = (props) => {
       <Searcher>
         <Title>Type something for searching</Title>
         <Description>You can find here different cool recipes</Description>
-        <SearcherInput
+        <Input
           type="text"
           value={searchValue}
           name="search"
@@ -30,28 +37,43 @@ const Header = (props) => {
 export default Header;
 
 const Wrapper = styled.header`
-  min-height: 70vh;
+  position: relative;
+  max-height: 70vh;
   padding: 0 15px;
   background-color: #3fd4aa;
   border-bottom: 1px solid #3fd4aa;
+
+  @media (min-width: 768px) {
+    padding: 0 24px;
+  }
 `;
 
 const Logo = styled.h1`
   margin: 0;
   padding: 0;
-  padding-top: 15px;
+  padding-top: 23px;
   font-size: 20px;
   line-height: 28px;
   font-weight: 300;
   color: #fafafa;
 `;
 
-const Navigation = styled.div``;
-
 const Searcher = styled.div`
-  margin-top: 75px;
-  margin-bottom: 35px;
+  margin-top: 35%;
+  margin-bottom: 20%;
   text-align: center;
+
+  @media (min-width: 500px) {
+    margin-top: 75px;
+    margin-bottom: 45px;
+  }
+
+  @media (min-width: 768px) {
+    margin: 0 auto;
+    margin-top: 75px;
+    margin-bottom: 45px;
+    width: 720px;
+  }
 `;
 
 const Title = styled.h2`
@@ -72,29 +94,4 @@ const Description = styled.p`
   line-height: 24px;
   font-weight: 400;
   color: #fafafa;
-`;
-
-const SearcherInput = styled.input`
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  padding: 15px 30px;
-  font-size: 16px;
-  line-height: 24px;
-  color: #555;
-  background-color: #fff;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px 0 #30303020;
-  outline: none;
-  transition: 200ms;
-
-  &:hover {
-    box-shadow: 0 3px 5px 0 #30303035;
-    transition: 200ms;
-  }
-
-  &::placeholder {
-    color: #cfcfcf;
-  }
 `;

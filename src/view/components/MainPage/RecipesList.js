@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Button from '../Controllers/Button';
+
 const fakeRecipe = {
   id: 1,
   title: 'This is my new cool recipe with changed',
@@ -19,7 +21,7 @@ const RecipesList = (props) => {
           <ItemDate>Created at: {fakeRecipe.date_creation}</ItemDate>
           <ItemContent>{fakeRecipe.text}</ItemContent>
           <ButtonContainer>
-            <MoreInfo type="button">More</MoreInfo>
+            <Button type="button">More</Button>
           </ButtonContainer>
         </Item>
         <Item key={fakeRecipe.id}>
@@ -27,7 +29,7 @@ const RecipesList = (props) => {
           <ItemDate>Created at: {fakeRecipe.date_creation}</ItemDate>
           <ItemContent>{fakeRecipe.text}</ItemContent>
           <ButtonContainer>
-            <MoreInfo type="button">More</MoreInfo>
+            <Button type="button">More</Button>
           </ButtonContainer>
         </Item>
         <Item key={fakeRecipe.id}>
@@ -35,7 +37,7 @@ const RecipesList = (props) => {
           <ItemDate>Created at: {fakeRecipe.date_creation}</ItemDate>
           <ItemContent>{fakeRecipe.text}</ItemContent>
           <ButtonContainer>
-            <MoreInfo type="button">More</MoreInfo>
+            <Button type="button">More</Button>
           </ButtonContainer>
         </Item>
       </List>
@@ -113,17 +115,4 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-`;
-
-const MoreInfo = styled.button`
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px 10px;
-  color: #fff;
-  font-size: 16px;
-  line-height: 24px;
-  background-color: #3fd4aa;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px 0 #30303050;
 `;

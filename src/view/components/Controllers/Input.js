@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = (props) => {
-  return <Wrapper {...props} />;
+  return <Component {...props} />;
 };
 
 export default Input;
 
-const Wrapper = styled.input`
+const Component = styled.input`
   box-sizing: border-box;
   display: block;
   width: 100%;

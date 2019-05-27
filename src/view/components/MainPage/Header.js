@@ -55,6 +55,7 @@ const Wrapper = styled.header`
 `;
 
 const FlexContainer = styled.div`
+  padding-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -68,6 +69,7 @@ const FlexContainer = styled.div`
   @media (min-width: 992px) {
     margin: 0 auto;
     padding: 0 15px;
+    padding-top: 20px;
     width: 960px;
   }
 `;
@@ -75,7 +77,6 @@ const FlexContainer = styled.div`
 const Logo = styled.h1`
   margin: 0;
   padding: 0;
-  padding-top: 23px;
   font-size: 20px;
   line-height: 28px;
   font-weight: 300;

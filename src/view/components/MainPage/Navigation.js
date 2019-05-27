@@ -9,7 +9,7 @@ const Navigation = (props) => {
   };
 
   return (
-    <Wrapper>
+    <React.Fragment>
       <Desctop>
         <DesctopList open={navigationOpen}>
           <DesctopItem>Home</DesctopItem>
@@ -33,26 +33,46 @@ const Navigation = (props) => {
           <Item>Sign Up</Item>
         </List>
       </Mobile>
-    </Wrapper>
+    </React.Fragment>
   );
 };
 
 export default Navigation;
 
-const Wrapper = styled.nav``;
-
-const Desctop = styled.div`
+const Desctop = styled.nav`
   display: none;
   @media (min-width: 768px) {
     display: block;
   }
 `;
 
-const DesctopList = styled.ul``;
+const DesctopList = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
 
-const DesctopItem = styled.li``;
+const DesctopItem = styled.li`
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 300;
+  color: #fff;
+  cursor: pointer;
+  transition: 250ms;
 
-const Mobile = styled.div`
+  &:hover {
+    background-color: #f0f0f073;
+    transition: 200ms;
+  }
+`;
+
+const Mobile = styled.nav`
   position: absolute;
   top: 0;
   left: 0;

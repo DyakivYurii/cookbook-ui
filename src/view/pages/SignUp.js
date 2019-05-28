@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signUp } from '../../store/auth/actions';
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Input from '../components/Controllers/Input';
 import Button from '../components/Controllers/Button';
 
-const SignIn = (props) => {
+const SignUp = (props) => {
   const [user, setUser] = useState({
+    name: '',
     email: '',
     password: ''
   });
@@ -16,13 +21,28 @@ const SignIn = (props) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.signUp(user);
+  };
+
   return (
     <React.Fragment>
       <Navigation />
       <SectionContainer>
         <Container>
           <Title>Sign Up</Title>
-          <Form method="POST">
+          <Form method="POST" onSubmit={handleSubmit}>
+            <FormInput
+              type="text"
+              value={user.name}
+              name="name"
+              onChange={handleInputChange}
+              placeholder="Name"
+              border
+              minlength="3"
+              maxlength="30"
+            />
             <FormInput
               type="email"
               value={user.email}
@@ -30,6 +50,8 @@ const SignIn = (props) => {
               onChange={handleInputChange}
               placeholder="E-mail"
               border
+              minlength="3"
+              maxlength="30"
             />
             <FormInput
               type="password"
@@ -38,6 +60,8 @@ const SignIn = (props) => {
               onChange={handleInputChange}
               placeholder="Password"
               border
+              minlength="3"
+              maxlength="30"
             />
             <SubmitButton type="submit">Sign Up</SubmitButton>
           </Form>
@@ -48,7 +72,26 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+SignUp.propTypes = {
+  history: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  signUp: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ signUp }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);
 
 const SectionContainer = styled.div`
   flex: 1;

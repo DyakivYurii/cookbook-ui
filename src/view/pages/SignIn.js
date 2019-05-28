@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signIn } from '../../store/auth/actions';
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -8,7 +12,6 @@ import Button from '../components/Controllers/Button';
 
 const SignIn = (props) => {
   const [user, setUser] = useState({
-    name: '',
     email: '',
     password: ''
   });
@@ -17,24 +20,22 @@ const SignIn = (props) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.signIn(user);
+  };
+
+  useEffect(() => {
+    console.log(props.auth);
+  });
+
   return (
     <React.Fragment>
       <Navigation />
       <SectionContainer>
         <Container>
           <Title>Sign In</Title>
-          <Form method="POST">
-            {/* <Label>
-              Write your Name */}
-            <FormInput
-              type="text"
-              value={user.name}
-              name="name"
-              onChange={handleInputChange}
-              placeholder="Name"
-              border
-            />
-            {/* </Label> */}
+          <Form method="POST" onSubmit={handleSubmit}>
             <FormInput
               type="email"
               value={user.email}
@@ -42,6 +43,8 @@ const SignIn = (props) => {
               onChange={handleInputChange}
               placeholder="E-mail"
               border
+              minlength="3"
+              maxlength="30"
             />
             <FormInput
               type="password"
@@ -50,6 +53,7 @@ const SignIn = (props) => {
               onChange={handleInputChange}
               placeholder="Password"
               border
+              minlength="3"
             />
             <SubmitButton type="submit">Sign In</SubmitButton>
           </Form>
@@ -60,7 +64,26 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+SignIn.propTypes = {
+  history: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  signIn: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ signIn }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);
 
 const SectionContainer = styled.div`
   flex: 1;
@@ -89,10 +112,6 @@ const Title = styled.h2`
   font-weight: 300;
   text-align: center;
   color: #151515;
-`;
-
-const Label = styled.label`
-  font-size: 14px;
 `;
 
 const FormInput = styled(Input)`

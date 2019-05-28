@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { getAllRecipes } from '../../store/recipes/actions';
 
 import Header from '../components/MainPage/Header';
-import RecipesList from '../components/MainPage/RecipesList';
+import RecipesList from '../components/RecipesList';
 import Footer from '../components/Footer';
 
 const MainPage = (props) => {
@@ -13,10 +13,7 @@ const MainPage = (props) => {
   return (
     <React.Fragment>
       <Header recipes={props.recipes} getAllRecipes={props.getAllRecipes} />
-      <RecipesList
-        recipes={props.recipes}
-        getAllRecipes={props.getAllRecipes}
-      />
+      <RecipesList recipes={props.recipes} getRecipes={props.getAllRecipes} />
       <Footer />
     </React.Fragment>
   );

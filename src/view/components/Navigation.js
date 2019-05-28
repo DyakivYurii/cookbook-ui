@@ -18,7 +18,12 @@ const Navigation = (props) => {
           <DesctopList open={navigationOpen}>
             <DesctopItem to={PATH.HOME}>Home</DesctopItem>
             {localStorage.getItem('token') ? (
-              <DesctopItem to={PATH.PROFILE}>Profile</DesctopItem>
+              <React.Fragment>
+                <DesctopItem to={PATH.PROFILE}>Profile</DesctopItem>
+                {/* <DesctopItem to={PATH.HOME} onClick={}>
+                  Sign Out
+                </DesctopItem> */}
+              </React.Fragment>
             ) : (
               <React.Fragment>
                 <DesctopItem to={PATH.SIGN_IN}>Sign In</DesctopItem>

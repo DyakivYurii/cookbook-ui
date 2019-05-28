@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Button from '../Controllers/Button';
+import Button from './Controllers/Button';
 
 const RecipesList = (props) => {
   useEffect(() => {
-    props.getAllRecipes();
+    props.getRecipes();
   }, []);
 
   return (
@@ -35,7 +35,7 @@ const RecipesList = (props) => {
 
 RecipesList.propTypes = {
   recipes: PropTypes.object.isRequired,
-  getAllRecipes: PropTypes.func.isRequired
+  getRecipes: PropTypes.func.isRequired
 };
 
 export default RecipesList;

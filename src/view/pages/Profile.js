@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUserInfoByToken } from '../../store/user/actions';
 
-import { PATH } from '../../constants/routes';
+import Navigation from '../components/Navigation';
+import UserProfile from '../components/Profile/UserProfile';
+import Footer from '../components/Footer';
 
 const Profile = (props) => {
-  return <h3>This is profile</h3>;
+  console.log(`Thsi is rposp`, props);
+  return (
+    <React.Fragment>
+      <Navigation />
+      <UserProfile recipes={props.recipes} />
+      <Footer />
+    </React.Fragment>
+  );
 };
 
 Profile.propTypes = {
-  user: PropTypes.object.isRequired,
-  getAllRecipes: PropTypes.func.isRequired
+  // user: PropTypes.object.isRequired,
+  recipes: PropTypes.object.isRequired
+  // getUserRecipes: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    recipes: state.recipes
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getUserInfoByToken }, dispatch);
+  return bindActionCreators({}, dispatch);
 };
 
 export default connect(

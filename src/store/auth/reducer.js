@@ -1,7 +1,6 @@
 import AUTH from './types';
 
 const initialState = {
-  userLogged: false,
   token: '',
   status: null
 };
@@ -26,7 +25,7 @@ const authReducer = (state = initialState, action) => {
       return { ...initialState, status: 'sign-up-request' };
     }
     case AUTH.SIGN_UP_SUCCESS: {
-      return { recipes: action.payload.result, status: 'sign-up-success' };
+      return { status: 'sign-up-success' };
     }
     case AUTH.SIGN_UP_FAILURE: {
       return { ...initialState, status: 'sign-up-failure' };
@@ -36,10 +35,14 @@ const authReducer = (state = initialState, action) => {
       return { ...initialState, status: 'sign-out-request' };
     }
     case AUTH.SIGN_OUT_SUCCESS: {
-      return { recipes: action.payload.result, status: 'sign-out-success' };
+      return { status: 'sign-out-success' };
     }
     case AUTH.SIGN_OUT_FAILURE: {
       return { ...initialState, status: 'sign-out-failure' };
+    }
+
+    case AUTH.CLEAR_REDUCER: {
+      return initialState;
     }
 
     default: {

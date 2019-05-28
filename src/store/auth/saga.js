@@ -21,7 +21,7 @@ function* signInAsync(action) {
 
 function* signUpAsync(action) {
   try {
-    const result = yield call(signUpAPI);
+    const result = yield call(signUpAPI, action.payload.user);
     yield put({ type: AUTH.SIGN_UP_SUCCESS, payload: { result: result } });
   } catch (error) {
     yield put({ type: AUTH.SIGN_UP_FAILURE });

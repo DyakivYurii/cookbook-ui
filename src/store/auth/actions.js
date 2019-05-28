@@ -1,8 +1,5 @@
 import AUTH from './types';
 
-/**
- *
- */
 export const signIn = (user) => {
   return { type: AUTH.SIGN_IN_REQUEST, payload: { user } };
 };
@@ -13,4 +10,8 @@ export const signUp = (user) => {
 
 export const signOut = () => {
   return { type: AUTH.SIGN_OUT_REQUEST };
+};
+
+export const clearAuthReducer = () => {
+  return { type: AUTH.CLEAR_REDUCER };
 };

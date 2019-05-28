@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { signUp } from '../../store/auth/actions';
+import { signUp, clearAuthReducer } from '../../store/auth/actions';
+
+import { PATH } from '../../constants/routes';
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -16,6 +19,18 @@ const SignUp = (props) => {
     email: '',
     password: ''
   });
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    if (props.auth.status === 'sign-up-success') {
+      setShowError(false);
+      props.clearAuthReducer();
+      return props.history.push(PATH.HOME);
+    }
+    if (props.auth.status === 'sign-up-failure') {
+      setShowError(true);
+    }
+  }, [props, props.auth]);
 
   const handleInputChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -25,6 +40,10 @@ const SignUp = (props) => {
     event.preventDefault();
     props.signUp(user);
   };
+
+  if (localStorage.getItem('token')) {
+    return <Redirect to={PATH.HOME} />;
+  }
 
   return (
     <React.Fragment>
@@ -63,6 +82,7 @@ const SignUp = (props) => {
               minlength="3"
               maxlength="30"
             />
+            <ErrorText show={showError}>Bad value</ErrorText>
             <SubmitButton type="submit">Sign Up</SubmitButton>
           </Form>
         </Container>
@@ -75,7 +95,8 @@ const SignUp = (props) => {
 SignUp.propTypes = {
   history: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  signUp: PropTypes.func.isRequired
+  signUp: PropTypes.func.isRequired,
+  clearAuthReducer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -85,7 +106,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ signUp }, dispatch);
+  return bindActionCreators({ signUp, clearAuthReducer }, dispatch);
 };
 
 export default connect(
@@ -136,6 +157,18 @@ const FormInput = styled(Input)`
   width: 100%;
   margin: 0 auto;
   margin-top: 20px;
+`;
+
+const ErrorText = styled.p`
+  margin: 0;
+  padding: 0;
+  padding-left: 30px;
+  padding-top: 15px;
+  color: #e05555;
+
+  ${(props) => {
+    return props.show ? `display: block;` : `display: none;`;
+  }}
 `;
 
 const SubmitButton = styled(Button)`

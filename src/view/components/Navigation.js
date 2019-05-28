@@ -17,8 +17,14 @@ const Navigation = (props) => {
         <Desctop>
           <DesctopList open={navigationOpen}>
             <DesctopItem to={PATH.HOME}>Home</DesctopItem>
-            <DesctopItem to={PATH.SIGN_IN}>Sign In</DesctopItem>
-            <DesctopItem to={PATH.SIGN_UP}>Sign Up</DesctopItem>
+            {localStorage.getItem('token') ? (
+              <DesctopItem to={PATH.PROFILE}>Profile</DesctopItem>
+            ) : (
+              <React.Fragment>
+                <DesctopItem to={PATH.SIGN_IN}>Sign In</DesctopItem>
+                <DesctopItem to={PATH.SIGN_UP}>Sign Up</DesctopItem>
+              </React.Fragment>
+            )}
           </DesctopList>
         </Desctop>
 
@@ -32,9 +38,15 @@ const Navigation = (props) => {
             <Icon open={navigationOpen} />
           </Burger>
           <List open={navigationOpen}>
-            <Item>Home</Item>
-            <Item>Sign In</Item>
-            <Item>Sign Up</Item>
+            <Item to={PATH.HOME}>Home</Item>
+            {localStorage.getItem('token') ? (
+              <Item to={PATH.PROFILE}>Profile</Item>
+            ) : (
+              <React.Fragment>
+                <Item to={PATH.SIGN_IN}>Sign In</Item>
+                <Item to={PATH.SIGN_UP}>Sign Up</Item>
+              </React.Fragment>
+            )}
           </List>
         </Mobile>
       </Container>
@@ -225,10 +237,12 @@ const List = styled.ul`
   }}
 `;
 
-const Item = styled(List)`
+const Item = styled(Link)`
+  display: block;
   padding: 25px 25px;
   font-size: 16px;
   line-height: 24px;
+  color: #000;
   text-decoration: none;
   border-bottom: 1px solid #f0f0f0;
 

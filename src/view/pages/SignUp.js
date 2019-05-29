@@ -8,7 +8,7 @@ import { signUp, clearAuthReducer } from '../../store/auth/actions';
 
 import { PATH } from '../../constants/routes';
 
-import Navigation from '../components/Navigation';
+import Navigation from '../containers/Navigation';
 import Footer from '../components/Footer';
 import Input from '../components/Controllers/Input';
 import Button from '../components/Controllers/Button';
@@ -30,7 +30,7 @@ const SignUp = (props) => {
     if (props.auth.status === 'sign-up-failure') {
       setShowError(true);
     }
-  }, [props, props.auth]);
+  }, [props.auth]);
 
   const handleInputChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });

@@ -9,10 +9,13 @@ import RecipesList from '../components/RecipesList';
 import Footer from '../components/Footer';
 
 const MainPage = (props) => {
-  console.log(`My props`, props);
   return (
     <React.Fragment>
-      <Header recipes={props.recipes} getAllRecipes={props.getAllRecipes} />
+      <Header
+        recipes={props.recipes}
+        getAllRecipes={props.getAllRecipes}
+        signOut={props.signOut}
+      />
       <RecipesList recipes={props.recipes} getRecipes={props.getAllRecipes} />
       <Footer />
     </React.Fragment>

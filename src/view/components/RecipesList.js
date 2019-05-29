@@ -9,6 +9,10 @@ const RecipesList = (props) => {
     props.getRecipes();
   }, []);
 
+  const formatedDate = (date) => {
+    return `${date.slice(0, 10)} ${date.slice(11, 19)}`;
+  };
+
   return (
     <Wrapper>
       {props.recipes.recipes.length ? (
@@ -17,7 +21,9 @@ const RecipesList = (props) => {
             return (
               <Item key={currentRecipe.id}>
                 <ItemTitle>{currentRecipe.title}</ItemTitle>
-                <ItemDate>Created at: {currentRecipe.date_creation}</ItemDate>
+                <ItemDate>
+                  Created at: {formatedDate(currentRecipe.date_creation)}
+                </ItemDate>
                 <ItemContent>{currentRecipe.text}</ItemContent>
                 <ButtonContainer>
                   <Button type="button">More</Button>

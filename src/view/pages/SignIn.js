@@ -8,7 +8,7 @@ import { signIn, clearAuthReducer } from '../../store/auth/actions';
 
 import { PATH } from '../../constants/routes';
 
-import Navigation from '../components/Navigation';
+import Navigation from '../containers/Navigation';
 import Footer from '../components/Footer';
 import Input from '../components/Controllers/Input';
 import Button from '../components/Controllers/Button';
@@ -23,14 +23,13 @@ const SignIn = (props) => {
   useEffect(() => {
     if (props.auth.status === 'sign-in-success') {
       setShowError(false);
-      window.localStorage.setItem('token', props.auth.token);
       props.clearAuthReducer();
       return props.history.push(PATH.HOME);
     }
     if (props.auth.status === 'sign-in-failure') {
       setShowError(true);
     }
-  }, [props, props.auth]);
+  }, [props.auth]);
 
   const handleInputChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });

@@ -31,14 +31,8 @@ const authReducer = (state = initialState, action) => {
       return { ...initialState, status: 'sign-up-failure' };
     }
 
-    case AUTH.SIGN_OUT_REQUEST: {
-      return { ...initialState, status: 'sign-out-request' };
-    }
-    case AUTH.SIGN_OUT_SUCCESS: {
-      return { status: 'sign-out-success' };
-    }
-    case AUTH.SIGN_OUT_FAILURE: {
-      return { ...initialState, status: 'sign-out-failure' };
+    case AUTH.SIGN_OUT: {
+      return { ...initialState, status: 'sign-out-success' };
     }
 
     case AUTH.CLEAR_REDUCER: {

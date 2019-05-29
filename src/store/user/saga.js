@@ -9,7 +9,7 @@ function* watcherRecipes() {
 
 function* getUserInfoAsync(action) {
   try {
-    const user = yield call(getUserInfoAPI, action.payload.token);
+    const user = yield call(getUserInfoAPI, action.payload);
     yield put({ type: USER.GET_INFO_SUCCESS, payload: { user } });
   } catch (error) {
     yield put({ type: USER.GET_INFO_FAILURE });

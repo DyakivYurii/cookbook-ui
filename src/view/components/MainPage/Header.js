@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Navigation from '../Navigation';
+import Navigation from '../../containers/Navigation';
 import Input from '../Controllers/Input';
 
 const Header = (props) => {
@@ -36,8 +36,8 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  // recipes: PropTypes.object.isRequired,
-  // getAllRecipes: PropTypes.func.isRequired
+  recipes: PropTypes.object.isRequired,
+  getAllRecipes: PropTypes.func.isRequired
 };
 
 export default Header;

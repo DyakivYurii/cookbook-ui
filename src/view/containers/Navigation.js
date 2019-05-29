@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signOut } from '../../store/auth/actions';
+
 import { PATH } from '../../constants/routes';
 
 const Navigation = (props) => {
@@ -20,9 +25,9 @@ const Navigation = (props) => {
             {localStorage.getItem('token') ? (
               <React.Fragment>
                 <DesctopItem to={PATH.PROFILE}>Profile</DesctopItem>
-                {/* <DesctopItem to={PATH.HOME} onClick={}>
+                <DesctopItem to={PATH.HOME} onClick={() => props.signOut()}>
                   Sign Out
-                </DesctopItem> */}
+                </DesctopItem>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -45,7 +50,12 @@ const Navigation = (props) => {
           <List open={navigationOpen}>
             <Item to={PATH.HOME}>Home</Item>
             {localStorage.getItem('token') ? (
-              <Item to={PATH.PROFILE}>Profile</Item>
+              <React.Fragment>
+                <Item to={PATH.PROFILE}>Profile</Item>
+                <Item to={PATH.HOME} onClick={() => props.signOut()}>
+                  Sign Out
+                </Item>
+              </React.Fragment>
             ) : (
               <React.Fragment>
                 <Item to={PATH.SIGN_IN}>Sign In</Item>
@@ -59,7 +69,18 @@ const Navigation = (props) => {
   );
 };
 
-export default Navigation;
+Navigation.propTypes = {
+  signOut: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ signOut }, dispatch);
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navigation);
 
 const FlexContainer = styled.div`
   background-color: #3fd4aa;

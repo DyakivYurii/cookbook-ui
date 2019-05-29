@@ -9,7 +9,8 @@ export const signUp = (user) => {
 };
 
 export const signOut = () => {
-  return { type: AUTH.SIGN_OUT_REQUEST };
+  localStorage.removeItem('token');
+  return { type: AUTH.SIGN_OUT };
 };
 
 export const clearAuthReducer = () => {

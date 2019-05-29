@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import RecipesList from '../RecipesList';
+import RecipesList from './RecipesList';
 
 const UserProfile = (props) => {
   const [user, setUser] = useState({
@@ -25,7 +25,7 @@ const UserProfile = (props) => {
   const handleSubmit = (event) => {};
 
   const handleNewRecipe = (event) => {
-    props.createRecipes(localStorage.getItem('token'), {
+    props.createRecipe(localStorage.getItem('token'), {
       title: 'Recipe',
       text: 'Some text'
     });
@@ -79,7 +79,7 @@ UserProfile.propTypes = {
   recipes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   getUserInfoByToken: PropTypes.func.isRequired,
-  createRecipes: PropTypes.func.isRequired
+  createRecipe: PropTypes.func.isRequired
 };
 
 export default UserProfile;

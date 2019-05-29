@@ -3,6 +3,7 @@ import RECIPES from './types';
 
 import {
   getAllRecipesFromAPI,
+  searchRecipesFromAPI,
   getRecipeAPI,
   getAllMyRecipesAPI,
   getMyRecipeAPI,
@@ -13,6 +14,7 @@ import {
 
 function* watcherRecipes() {
   yield takeEvery(RECIPES.GET_ALL_REQUEST, getAllRecipesAsync);
+  yield takeEvery(RECIPES.SEARCH_REQUEST, searchRecipesAsync);
   yield takeEvery(RECIPES.GET_SINGLE_REQUEST, getSingleRecipeAsync);
   yield takeEvery(RECIPES.GET_MY_ALL_REQUEST, getAllMyRecipesAsync);
   yield takeEvery(RECIPES.GET_MY_SINGLE_REQUEST, getMySingleRecipeAsync);
@@ -24,6 +26,15 @@ function* watcherRecipes() {
 function* getAllRecipesAsync(action) {
   try {
     const result = yield call(getAllRecipesFromAPI);
+    yield put({ type: RECIPES.GET_ALL_SUCCESS, payload: { result } });
+  } catch (error) {
+    yield put({ type: RECIPES.GET_ALL_FAILURE });
+  }
+}
+
+function* searchRecipesAsync(action) {
+  try {
+    const result = yield call(searchRecipesFromAPI, action.payload);
     yield put({ type: RECIPES.GET_ALL_SUCCESS, payload: { result } });
   } catch (error) {
     yield put({ type: RECIPES.GET_ALL_FAILURE });

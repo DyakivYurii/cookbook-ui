@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllRecipes } from '../../store/recipes/actions';
 
-import Header from '../components/MainPage/Header';
+import Header from '../components/Header';
 import RecipesList from '../components/RecipesList';
 import Footer from '../components/Footer';
 

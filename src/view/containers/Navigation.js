@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signOut } from '../../store/auth/actions';
+
+import { PATH } from '../../constants/routes';
 
 const Navigation = (props) => {
   const [navigationOpen, setNavigationOpen] = useState(false);
@@ -9,35 +16,104 @@ const Navigation = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <Desctop>
-        <DesctopList open={navigationOpen}>
-          <DesctopItem>Home</DesctopItem>
-          <DesctopItem>Sign In</DesctopItem>
-          <DesctopItem>Sign Up</DesctopItem>
-        </DesctopList>
-      </Desctop>
+    <FlexContainer>
+      <Container>
+        <Logo>CookBook</Logo>
+        <Desctop>
+          <DesctopList open={navigationOpen}>
+            <DesctopItem to={PATH.HOME}>Home</DesctopItem>
+            {localStorage.getItem('token') ? (
+              <React.Fragment>
+                <DesctopItem to={PATH.PROFILE}>Profile</DesctopItem>
+                <DesctopItem to={PATH.HOME} onClick={() => props.signOut()}>
+                  Sign Out
+                </DesctopItem>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <DesctopItem to={PATH.SIGN_IN}>Sign In</DesctopItem>
+                <DesctopItem to={PATH.SIGN_UP}>Sign Up</DesctopItem>
+              </React.Fragment>
+            )}
+          </DesctopList>
+        </Desctop>
 
-      <Mobile>
-        <Title open={navigationOpen}>Menu</Title>
-        <Burger
-          type="button"
-          onClick={changeNavigationState}
-          open={navigationOpen}
-        >
-          <Icon open={navigationOpen} />
-        </Burger>
-        <List open={navigationOpen}>
-          <Item>Home</Item>
-          <Item>Sign In</Item>
-          <Item>Sign Up</Item>
-        </List>
-      </Mobile>
-    </React.Fragment>
+        <Mobile>
+          <Title open={navigationOpen}>Menu</Title>
+          <Burger
+            type="button"
+            onClick={changeNavigationState}
+            open={navigationOpen}
+          >
+            <Icon open={navigationOpen} />
+          </Burger>
+          <List open={navigationOpen}>
+            <Item to={PATH.HOME}>Home</Item>
+            {localStorage.getItem('token') ? (
+              <React.Fragment>
+                <Item to={PATH.PROFILE}>Profile</Item>
+                <Item to={PATH.HOME} onClick={() => props.signOut()}>
+                  Sign Out
+                </Item>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Item to={PATH.SIGN_IN}>Sign In</Item>
+                <Item to={PATH.SIGN_UP}>Sign Up</Item>
+              </React.Fragment>
+            )}
+          </List>
+        </Mobile>
+      </Container>
+    </FlexContainer>
   );
 };
 
-export default Navigation;
+Navigation.propTypes = {
+  signOut: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ signOut }, dispatch);
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navigation);
+
+const FlexContainer = styled.div`
+  background-color: #3fd4aa;
+  padding: 20px 15px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    padding: 0 24px;
+    width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 960px;
+  }
+`;
+
+const Logo = styled.h1`
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 300;
+  color: #fafafa;
+`;
 
 const Desctop = styled.nav`
   display: none;
@@ -56,15 +132,17 @@ const DesctopList = styled.ul`
   list-style: none;
 `;
 
-const DesctopItem = styled.li`
+const DesctopItem = styled(Link)`
   display: inline-block;
   padding: 10px 20px;
   font-size: 18px;
   line-height: 24px;
   font-weight: 300;
   color: #fff;
+  text-decoration: none;
   cursor: pointer;
   transition: 250ms;
+  border: none;
 
   &:hover {
     background-color: #f0f0f073;
@@ -185,10 +263,13 @@ const List = styled.ul`
   }}
 `;
 
-const Item = styled.li`
+const Item = styled(Link)`
+  display: block;
   padding: 25px 25px;
   font-size: 16px;
   line-height: 24px;
+  color: #000;
+  text-decoration: none;
   border-bottom: 1px solid #f0f0f0;
 
   &:last-child {

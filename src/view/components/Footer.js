@@ -12,7 +12,7 @@ const Footer = () => {
 export default Footer;
 
 const Wrapper = styled.footer`
-  margin-top: 35px;
+  margin-top: auto;
   padding: 20px 15px;
   background-color: #3fd4aa;
 `;

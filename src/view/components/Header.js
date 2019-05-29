@@ -13,8 +13,7 @@ const Header = (props) => {
   };
 
   useEffect(() => {
-    // const result = props.getAllRecipes();
-    // console.log(result);
+    props.searchRecipesByTitle(searchValue);
   }, [searchValue]);
 
   return (
@@ -37,7 +36,8 @@ const Header = (props) => {
 
 Header.propTypes = {
   recipes: PropTypes.object.isRequired,
-  getAllRecipes: PropTypes.func.isRequired
+  getAllRecipes: PropTypes.func.isRequired,
+  searchRecipesByTitle: PropTypes.func.isRequired
 };
 
 export default Header;

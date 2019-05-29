@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Button from './Controllers/Button';
 
 const RecipesList = (props) => {
-  useEffect(() => {
-    props.getRecipes();
-  }, []);
-
   const formatedDate = (date) => {
     return `${date.slice(0, 10)} ${date.slice(11, 19)}`;
   };
@@ -32,16 +28,18 @@ const RecipesList = (props) => {
             );
           })}
         </List>
+      ) : props.recipes.status === 'request' ||
+        props.recipes.status === null ? (
+        <Get>Loading</Get>
       ) : (
-        <p>Loading</p>
+        <NullRecipes>No recipes</NullRecipes>
       )}
     </Wrapper>
   );
 };
 
 RecipesList.propTypes = {
-  recipes: PropTypes.object.isRequired,
-  getRecipes: PropTypes.func.isRequired
+  recipes: PropTypes.object.isRequired
 };
 
 export default RecipesList;
@@ -72,7 +70,6 @@ const List = styled.ul`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
   }
 `;
 
@@ -82,10 +79,24 @@ const Item = styled.li`
 
   @media (min-width: 768px) {
     width: 340px;
+    margin-right: 40px;
+
+    :nth-child(2n) {
+      margin-right: 0;
+    }
   }
 
   @media (min-width: 992px) {
     width: 290px;
+    margin-right: 45px;
+
+    :nth-child(2n) {
+      margin-right: 45px;
+    }
+
+    :nth-child(3n) {
+      margin-right: 0;
+    }
   }
 `;
 
@@ -114,4 +125,26 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+`;
+
+const Get = styled.p`
+  margin: 0;
+  margin-top: 50px;
+  padding: 0;
+  padding-top: 10px;
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 300;
+  text-align: center;
+`;
+
+const NullRecipes = styled.h3`
+  margin: 0;
+  margin-top: 50px;
+  padding: 0;
+  padding-top: 10px;
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 300;
+  text-align: center;
 `;

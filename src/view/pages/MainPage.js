@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllRecipes } from '../../store/recipes/actions';
+import {
+  getAllRecipes,
+  searchRecipesByTitle
+} from '../../store/recipes/actions';
 
 import Header from '../components/Header';
 import RecipesList from '../components/RecipesList';
@@ -14,9 +17,10 @@ const MainPage = (props) => {
       <Header
         recipes={props.recipes}
         getAllRecipes={props.getAllRecipes}
+        searchRecipesByTitle={props.searchRecipesByTitle}
         signOut={props.signOut}
       />
-      <RecipesList recipes={props.recipes} getRecipes={props.getAllRecipes} />
+      <RecipesList recipes={props.recipes} />
       <Footer />
     </React.Fragment>
   );
@@ -25,7 +29,8 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   history: PropTypes.object.isRequired,
   recipes: PropTypes.object.isRequired,
-  getAllRecipes: PropTypes.func.isRequired
+  getAllRecipes: PropTypes.func.isRequired,
+  searchRecipesByTitle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -35,7 +40,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getAllRecipes }, dispatch);
+  return bindActionCreators({ getAllRecipes, searchRecipesByTitle }, dispatch);
 };
 
 export default connect(

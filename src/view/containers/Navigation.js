@@ -10,9 +10,17 @@ import { PATH } from '../../constants/routes';
 
 const Navigation = (props) => {
   const [navigationOpen, setNavigationOpen] = useState(false);
+  const [userLoggedNav, setUserLoggedNav] = useState(
+    !!localStorage.getItem('token')
+  );
 
   const changeNavigationState = () => {
     setNavigationOpen(!navigationOpen);
+  };
+
+  const handleSignOut = () => {
+    props.signOut();
+    setUserLoggedNav(false);
   };
 
   return (
@@ -22,10 +30,10 @@ const Navigation = (props) => {
         <Desctop>
           <DesctopList open={navigationOpen}>
             <DesctopItem to={PATH.HOME}>Home</DesctopItem>
-            {localStorage.getItem('token') ? (
+            {userLoggedNav ? (
               <React.Fragment>
                 <DesctopItem to={PATH.PROFILE}>Profile</DesctopItem>
-                <DesctopItem to={PATH.HOME} onClick={() => props.signOut()}>
+                <DesctopItem to={PATH.HOME} onClick={handleSignOut}>
                   Sign Out
                 </DesctopItem>
               </React.Fragment>
@@ -49,10 +57,10 @@ const Navigation = (props) => {
           </Burger>
           <List open={navigationOpen}>
             <Item to={PATH.HOME}>Home</Item>
-            {localStorage.getItem('token') ? (
+            {userLoggedNav ? (
               <React.Fragment>
                 <Item to={PATH.PROFILE}>Profile</Item>
-                <Item to={PATH.HOME} onClick={() => props.signOut()}>
+                <Item to={PATH.HOME} onClick={handleSignOut}>
                   Sign Out
                 </Item>
               </React.Fragment>

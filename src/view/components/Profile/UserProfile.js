@@ -14,17 +14,19 @@ const UserProfile = (props) => {
     props.getUserInfoByToken(localStorage.getItem('token'));
   }, []);
 
-  useEffect(() => {}, [props.user]);
+  useEffect(() => {
+    setUser({ name: props.user.name, email: props.user.email });
+  }, [props.user]);
 
   return (
     <Wrapper>
       <Title>Your profile</Title>
       <UserInfo>
         <p>
-          Name: <span>{props.user.name}</span>
+          Name: <span>{user.name}</span>
         </p>
         <p>
-          E-mail: <span>{props.user.email}</span>
+          E-mail: <span>{user.email}</span>
         </p>
       </UserInfo>
       <RecipesList recipes={props.recipes} getRecipes={() => {}} />

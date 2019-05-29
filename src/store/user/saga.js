@@ -10,7 +10,10 @@ function* watcherRecipes() {
 function* getUserInfoAsync(action) {
   try {
     const user = yield call(getUserInfoAPI, action.payload);
-    yield put({ type: USER.GET_INFO_SUCCESS, payload: { user } });
+    yield put({
+      type: USER.GET_INFO_SUCCESS,
+      payload: { name: user.name, email: user.email }
+    });
   } catch (error) {
     yield put({ type: USER.GET_INFO_FAILURE });
   }

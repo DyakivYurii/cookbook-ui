@@ -6,6 +6,6 @@ export const getUserInfoAPI = ({ token }) => {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then((result) => {
-      return result.data.data;
+      return result.data.data[0];
     });
 };

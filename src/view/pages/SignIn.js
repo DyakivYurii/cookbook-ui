@@ -130,6 +130,8 @@ const Title = styled.h2`
   color: #151515;
 `;
 
+const Form = styled.form``;
+
 const FormInput = styled(Input)`
   width: 100%;
   margin: 0 auto;
@@ -161,5 +163,3 @@ const ErrorText = styled.p`
 const SubmitButton = styled(Button)`
   margin-top: 35px;
 `;
-
-const Form = styled.form``;

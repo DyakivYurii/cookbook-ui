@@ -14,7 +14,7 @@ const userReducer = (state = initialState, action) => {
     case USER.GET_INFO_SUCCESS: {
       return {
         ...state,
-        ...action.payload.user,
+        ...action.payload,
         status: 'success'
       };
     }

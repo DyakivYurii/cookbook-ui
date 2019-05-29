@@ -26,7 +26,9 @@ const Navigation = (props) => {
   return (
     <FlexContainer>
       <Container>
-        <Logo>CookBook</Logo>
+        <Logo>
+          <Bold>C</Bold>ook<Bold>B</Bold>ook
+        </Logo>
         <Desctop>
           <DesctopList open={navigationOpen}>
             <DesctopItem to={PATH.HOME}>Home</DesctopItem>
@@ -121,6 +123,11 @@ const Logo = styled.h1`
   line-height: 28px;
   font-weight: 300;
   color: #fafafa;
+`;
+
+const Bold = styled.span`
+  font-weight: 400;
+  color: #fff;
 `;
 
 const Desctop = styled.nav`

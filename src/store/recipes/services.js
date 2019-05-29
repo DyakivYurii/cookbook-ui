@@ -8,9 +8,16 @@ export const getAllRecipesFromAPI = () => {
     .get(`${process.env.REACT_APP_API_URL}/api/recipes`)
     .then((result) => {
       return result.data.data;
-    })
-    .catch((error) => {
-      return error;
+    });
+};
+
+export const searchRecipesFromAPI = ({ searchedValue }) => {
+  return axios
+    .get(
+      `${process.env.REACT_APP_API_URL}/api/recipes/?search=${searchedValue}`
+    )
+    .then((result) => {
+      return result.data.data;
     });
 };
 

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Navigation from '../../containers/Navigation';
-import Input from '../Controllers/Input';
+import Navigation from '../containers/Navigation';
+import Input from './Controllers/Input';
 
 const Header = (props) => {
   const [searchValue, setSearchValue] = useState('');

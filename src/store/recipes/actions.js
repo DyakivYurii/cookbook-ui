@@ -7,6 +7,10 @@ export const getAllRecipes = () => {
   return { type: RECIPES.GET_ALL_REQUEST };
 };
 
+export const searchRecipesByTitle = (searchedValue) => {
+  return { type: RECIPES.SEARCH_REQUEST, payload: { searchedValue } };
+};
+
 export const getRecip = (id) => {
   return { type: RECIPES.GET_SINGLE_REQUEST, payload: { id } };
 };

@@ -9,8 +9,6 @@ const RecipesList = (props) => {
     return `${date.slice(0, 10)} ${date.slice(11, 19)}`;
   };
 
-  console.log(props);
-
   return (
     <Wrapper>
       {props.recipes.recipes.length ? (

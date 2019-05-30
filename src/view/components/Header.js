@@ -23,6 +23,7 @@ const Header = (props) => {
         <Title>Type something for searching</Title>
         <Description>You can find here different cool recipes</Description>
         <Input
+          inputType="searchInput"
           type="text"
           value={searchValue}
           name="search"

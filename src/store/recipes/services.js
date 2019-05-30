@@ -25,7 +25,11 @@ export const searchRecipesFromAPI = ({ searchedValue }) => {
  * Get recipe not auth user
  */
 export const getRecipeAPI = ({ id }) => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/recipe/${id}`);
+  return axios
+    .get(`${process.env.REACT_APP_API_URL}/api/recipes/recipe/${id}`)
+    .then((result) => {
+      return result.data.data;
+    });
 };
 
 /**
@@ -67,6 +71,7 @@ export const getMyRecipeAPI = ({ token, id }) => {
  * Update my recipe
  */
 export const updateMyRecipeAPI = ({ token, id, recipe }) => {
+  console.log(`${process.env.REACT_APP_API_URL}/api/recipes/me/${id}`);
   return axios.put(
     `${process.env.REACT_APP_API_URL}/api/recipes/me/${id}`,
     {

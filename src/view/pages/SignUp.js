@@ -52,7 +52,8 @@ const SignUp = (props) => {
         <Container>
           <Title>Sign Up</Title>
           <Form method="POST" onSubmit={handleSubmit}>
-            <FormInput
+            <Input
+              inputType="formInput"
               type="text"
               value={user.name}
               name="name"
@@ -62,7 +63,8 @@ const SignUp = (props) => {
               minlength="3"
               maxlength="30"
             />
-            <FormInput
+            <Input
+              inputType="formInput"
               type="email"
               value={user.email}
               name="email"
@@ -72,7 +74,8 @@ const SignUp = (props) => {
               minlength="3"
               maxlength="30"
             />
-            <FormInput
+            <Input
+              inputType="formInput"
               type="password"
               value={user.password}
               name="password"
@@ -141,22 +144,6 @@ const Title = styled.h2`
   font-weight: 300;
   text-align: center;
   color: #151515;
-`;
-
-const FormInput = styled(Input)`
-  width: 100%;
-  margin: 0 auto;
-  margin-bottom: 15px;
-  box-shadow: none;
-  border: 1px solid #25252540;
-
-  &::placeholder {
-    color: #30303070;
-  }
-
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 20px;
 `;
 
 const ErrorText = styled.p`

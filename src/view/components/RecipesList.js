@@ -2,63 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Button from './Controllers/Button';
+import LinkButton from './Controllers/LinkButton';
+
+import { PATH } from '../../constants/routes';
+import { formatedDate } from '../../utils';
 
 const RecipesList = (props) => {
-  const formatedDate = (date) => {
-    return `${date.slice(0, 10)} ${date.slice(11, 19)}`;
-  };
-
-  console.log(props);
-
   return (
     <Wrapper>
-      {props.recipes.recipes && props.recipes.recipes.length && (
-        <List>
-          {props.recipes.recipes.map((currentRecipe) => {
-            return (
-              <Item key={currentRecipe.id}>
-                <ItemTitle>{currentRecipe.title}</ItemTitle>
-                <ItemDate>
-                  Created at: {formatedDate(currentRecipe.date_creation)}
-                </ItemDate>
-                <ItemContent>{currentRecipe.text}</ItemContent>
-                <ButtonContainer>
-                  <Button type="button">More</Button>
-                </ButtonContainer>
-              </Item>
-            );
-          })}
-        </List>
-      )}
-      {/* {props.recipes.recipes && <NullRecipes>No recipes</NullRecipes>}: */}
+      {props.recipes.recipes &&
+        props.recipes.recipes.length &&
+        props.recipes.recipes[0].id && (
+          <List>
+            {props.recipes.recipes.map((currentRecipe) => {
+              return (
+                <Item key={currentRecipe.id}>
+                  <ItemTitle>{currentRecipe.title}</ItemTitle>
+                  <ItemDate>
+                    Created at: {formatedDate(currentRecipe.date_creation)}
+                  </ItemDate>
+                  <ItemContent>{currentRecipe.text}</ItemContent>
+                  <ButtonContainer>
+                    <LinkButton to={`${PATH.RECIPE}/${currentRecipe.id}`}>
+                      More
+                    </LinkButton>
+                  </ButtonContainer>
+                </Item>
+              );
+            })}
+          </List>
+        )}
       {props.recipes.status === 'request' ? (
         <Get>Loading</Get>
       ) : props.recipes.recipes && props.recipes.recipes.length === 0 ? (
         <NullRecipes>No recipes</NullRecipes>
       ) : null}
-      {/* {props.recipes.recipes && props.recipes.recipes.length ? (
-        <List>
-          {props.recipes.recipes.map((currentRecipe) => {
-            return (
-              <Item key={currentRecipe.id}>
-                <ItemTitle>{currentRecipe.title}</ItemTitle>
-                <ItemDate>
-                  Created at: {formatedDate(currentRecipe.date_creation)}
-                </ItemDate>
-                <ItemContent>{currentRecipe.text}</ItemContent>
-                <ButtonContainer>
-                  <Button type="button">More</Button>
-                </ButtonContainer>
-              </Item>
-            );
-          })}
-        </List>
-      ) : props.recipes.status === 'request' ? (
-        <Get>Loading</Get>
-      ) : props.recipes.recipes.length === 0 ? (
-        <NullRecipes>No recipes</NullRecipes>
-      ) : null} */}
     </Wrapper>
   );
 };

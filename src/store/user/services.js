@@ -16,7 +16,7 @@ export const getMyUserInfoAPI = ({ token }) => {
 
 export const putUserAPI = ({ token, userInfo }) => {
   return axios
-    .get(
+    .put(
       `${process.env.REACT_APP_API_URL}/api/users/me`,
       { ...userInfo },
       {

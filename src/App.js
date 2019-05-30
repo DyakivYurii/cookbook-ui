@@ -11,6 +11,7 @@ import SignUp from './view/pages/SignUp';
 import MainPage from './view/pages/MainPage';
 import PrivateRoute from './view/components/PrivateRoute';
 import Profile from './view/pages/Profile';
+import Recipe from './view/pages/Recipe';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
             <PrivateRoute path={PATH.PROFILE} component={Profile} />
 
+            <Route path={`${PATH.RECIPE}/:id`} component={Recipe} />
             <Route path={PATH.HOME} exact component={MainPage} />
             <Redirect from="*" to="/" />
           </Switch>

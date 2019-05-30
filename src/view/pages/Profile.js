@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUserInfoByToken } from '../../store/user/actions';
+import { getUserInfoByToken, putUser } from '../../store/user/actions';
 import { createRecipe, getAllMyRecipes } from '../../store/recipes/actions';
 
 import Navigation from '../containers/Navigation';
@@ -17,6 +17,7 @@ const Profile = (props) => {
         recipes={props.recipes}
         user={props.user}
         getUserInfoByToken={props.getUserInfoByToken}
+        putUser={props.putUser}
         getUserRecipes={props.getAllMyRecipes}
         createRecipe={props.createRecipe}
       />
@@ -30,7 +31,8 @@ Profile.propTypes = {
   user: PropTypes.object.isRequired,
   getUserInfoByToken: PropTypes.func.isRequired,
   createRecipe: PropTypes.func.isRequired,
-  getAllMyRecipes: PropTypes.func.isRequired
+  getAllMyRecipes: PropTypes.func.isRequired,
+  putUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -42,7 +44,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { getUserInfoByToken, getAllMyRecipes, createRecipe },
+    {
+      getUserInfoByToken,
+      getAllMyRecipes,
+      createRecipe,
+      putUser
+    },
     dispatch
   );
 };

@@ -8,6 +8,13 @@ import { PATH } from '../../constants/routes';
 import { formatedDate } from '../../utils';
 
 const RecipesList = (props) => {
+  const formatText = (text) => {
+    if (text.length > 100) {
+      return text.slice(0, 100);
+    }
+    return text;
+  };
+
   return (
     <Wrapper>
       {props.recipes.recipes &&
@@ -21,7 +28,7 @@ const RecipesList = (props) => {
                   <ItemDate>
                     Created at: {formatedDate(currentRecipe.date_creation)}
                   </ItemDate>
-                  <ItemContent>{currentRecipe.text}</ItemContent>
+                  <ItemContent>{formatText(currentRecipe.text)}</ItemContent>
                   <ButtonContainer>
                     <LinkButton to={`${PATH.RECIPE}/${currentRecipe.id}`}>
                       More
@@ -47,19 +54,16 @@ RecipesList.propTypes = {
 
 export default RecipesList;
 
-const Wrapper = styled.header`
-  padding: 0 15px;
+const Wrapper = styled.section`
   color: #303030;
   background-color: #fff;
 
   @media (min-width: 768px) {
     margin: 0 auto;
-    padding: 0 24px;
     width: 720px;
   }
 
   @media (min-width: 992px) {
-    padding: 0 15px;
     width: 960px;
   }
 `;

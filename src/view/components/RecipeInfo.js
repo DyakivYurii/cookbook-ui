@@ -56,9 +56,18 @@ const RecipeInfo = (props) => {
             <ItemContent>{props.recipes.recipes[0].recipe.text}</ItemContent>
             {userId == props.recipes.recipes[0].recipe.author_id && (
               <React.Fragment>
-                <ButtonChange type="button" onClick={handleOpenForm}>
-                  Change recipe
-                </ButtonChange>
+                <ButtonSection>
+                  <ButtonChange type="button" onClick={handleOpenForm}>
+                    Change recipe
+                  </ButtonChange>
+                  <Button
+                    type="button"
+                    buttonType="delete"
+                    onClick={handleDeletingRecipe}
+                  >
+                    Delete
+                  </Button>
+                </ButtonSection>
                 <ModifyRecipeForm
                   recipes={props.recipes.recipes[0].recipe}
                   showForm={showUpdateProfileForm}
@@ -66,13 +75,6 @@ const RecipeInfo = (props) => {
                   updateRecipe={props.updateRecipe}
                   setUpdateRecipeInfo={setUpdateRecipeInfo}
                 />
-                <Button
-                  type="button"
-                  buttonType="delete"
-                  onClick={handleDeletingRecipe}
-                >
-                  Delete
-                </Button>
               </React.Fragment>
             )}
             <SmallTitle>History of changes:</SmallTitle>
@@ -115,12 +117,10 @@ const Wrapper = styled.div`
 
   @media (min-width: 768px) {
     margin: 0 auto;
-    padding: 0 24px;
     width: 720px;
   }
 
   @media (min-width: 992px) {
-    padding: 0 15px;
     width: 960px;
   }
 `;
@@ -128,28 +128,6 @@ const Wrapper = styled.div`
 const Item = styled.div`
   margin: 15px 0;
   padding: 10px 0;
-
-  @media (min-width: 768px) {
-    width: 340px;
-    margin-right: 40px;
-
-    :nth-child(2n) {
-      margin-right: 0;
-    }
-  }
-
-  @media (min-width: 992px) {
-    width: 290px;
-    margin-right: 45px;
-
-    :nth-child(2n) {
-      margin-right: 45px;
-    }
-
-    :nth-child(3n) {
-      margin-right: 0;
-    }
-  }
 `;
 
 const ItemTitle = styled.h2`
@@ -173,12 +151,6 @@ const ItemContent = styled.p`
   font-size: 300;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
 const SmallTitle = styled.h3`
   margin: 0;
   margin-top: 25px;
@@ -186,6 +158,7 @@ const SmallTitle = styled.h3`
   padding: 0;
   font-size: 20px;
   line-height: 34px;
+  text-align: center;
   font-weight: 300;
   text-align: center;
   color: #000;
@@ -208,4 +181,19 @@ const ButtonChange = styled(Button)`
   margin-bottom: 7px;
   color: #fff;
   background: #33f19e;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 50px;
+  }
+`;
+
+const ButtonSection = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-right: 50px;
+    width: 500px;
+  }
 `;

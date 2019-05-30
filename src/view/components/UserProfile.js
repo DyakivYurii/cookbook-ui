@@ -72,9 +72,14 @@ const UserProfile = (props) => {
           <Bold>E-mail</Bold>: {user.email}
         </Text>
       </UserInfo>
-      <ButtonChange type="button" onClick={handleOpenChangeUserForm}>
-        Change profile
-      </ButtonChange>
+      <ButtonSection>
+        <ButtonChange type="button" onClick={handleOpenChangeUserForm}>
+          Change profile
+        </ButtonChange>
+        <Button type="button" onClick={handleOpenForm}>
+          Add new recipe
+        </Button>
+      </ButtonSection>
       <ChangeProfile
         user={props.user}
         showForm={showChangeProfileForm}
@@ -82,9 +87,6 @@ const UserProfile = (props) => {
         updateUser={props.putUser}
         setChangedUserInfo={setChangedUserInfo}
       />
-      <Button type="button" onClick={handleOpenForm}>
-        Add new recipe
-      </Button>
       <NewRecipeForm
         showForm={showCreatingRecipeForm}
         closeForm={handleCloseRecipeForm}
@@ -153,6 +155,21 @@ const ButtonChange = styled(Button)`
   margin-bottom: 7px;
   color: #fff;
   background: #33f19e;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 50px;
+  }
+`;
+
+const ButtonSection = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-right: 50px;
+    width: 500px;
+  }
 `;
 
 const RecipesTitle = styled.h3`

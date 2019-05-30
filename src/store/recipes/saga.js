@@ -53,6 +53,7 @@ function* getSingleRecipeAsync(action) {
 function* getAllMyRecipesAsync(action) {
   try {
     const result = yield call(getAllMyRecipesAPI, action.payload);
+    console.log(`we got it`, result);
     yield put({ type: RECIPES.GET_MY_ALL_SUCCESS, payload: { result } });
   } catch (error) {
     yield put({ type: RECIPES.GET_MY_ALL_FAILURE });

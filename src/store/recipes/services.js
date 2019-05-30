@@ -32,9 +32,13 @@ export const getRecipeAPI = ({ id }) => {
  * Get all my recipes
  */
 export const getAllMyRecipesAPI = ({ token }) => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/me`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+  return axios
+    .get(`${process.env.REACT_APP_API_URL}/api/recipes/me`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then((result) => {
+      return result.data.data;
+    });
 };
 
 /**

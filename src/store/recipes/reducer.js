@@ -1,7 +1,7 @@
 import RECIPES from './types';
 
 const initialState = {
-  recipes: [],
+  recipes: null,
   status: null
 };
 

@@ -170,11 +170,6 @@ const ButtonSection = styled.div`
     margin-right: 50px;
     width: 500px;
   }
-
-  /* @media (min-width: 992px) {
-    padding: 0 15px;
-    width: 960px;
-  } */
 `;
 
 const RecipesTitle = styled.h3`

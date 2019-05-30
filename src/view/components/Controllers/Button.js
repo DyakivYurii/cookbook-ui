@@ -45,7 +45,13 @@ const Component = styled.button`
           background-color: #f95c71;
           transition: 200ms;
           box-shadow: 0 3px 5px 0 #30303035;
-        }`
+        }
+        
+        @media (min-width: 768px) {
+          margin: 0;
+          margin-top: 10px;
+        }
+        `
       : null;
   }}
 `;

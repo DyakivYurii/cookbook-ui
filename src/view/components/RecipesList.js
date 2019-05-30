@@ -9,9 +9,11 @@ const RecipesList = (props) => {
     return `${date.slice(0, 10)} ${date.slice(11, 19)}`;
   };
 
+  console.log(props);
+
   return (
     <Wrapper>
-      {props.recipes.recipes.length ? (
+      {props.recipes.recipes && props.recipes.recipes.length && (
         <List>
           {props.recipes.recipes.map((currentRecipe) => {
             return (
@@ -28,12 +30,35 @@ const RecipesList = (props) => {
             );
           })}
         </List>
-      ) : props.recipes.status === 'request' ||
-        props.recipes.status === null ? (
-        <Get>Loading</Get>
-      ) : (
-        <NullRecipes>No recipes</NullRecipes>
       )}
+      {/* {props.recipes.recipes && <NullRecipes>No recipes</NullRecipes>}: */}
+      {props.recipes.status === 'request' ? (
+        <Get>Loading</Get>
+      ) : props.recipes.recipes && props.recipes.recipes.length === 0 ? (
+        <NullRecipes>No recipes</NullRecipes>
+      ) : null}
+      {/* {props.recipes.recipes && props.recipes.recipes.length ? (
+        <List>
+          {props.recipes.recipes.map((currentRecipe) => {
+            return (
+              <Item key={currentRecipe.id}>
+                <ItemTitle>{currentRecipe.title}</ItemTitle>
+                <ItemDate>
+                  Created at: {formatedDate(currentRecipe.date_creation)}
+                </ItemDate>
+                <ItemContent>{currentRecipe.text}</ItemContent>
+                <ButtonContainer>
+                  <Button type="button">More</Button>
+                </ButtonContainer>
+              </Item>
+            );
+          })}
+        </List>
+      ) : props.recipes.status === 'request' ? (
+        <Get>Loading</Get>
+      ) : props.recipes.recipes.length === 0 ? (
+        <NullRecipes>No recipes</NullRecipes>
+      ) : null} */}
     </Wrapper>
   );
 };
@@ -70,6 +95,7 @@ const List = styled.ul`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 35px;
   }
 `;
 
@@ -128,8 +154,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Get = styled.p`
-  margin: 0;
-  margin-top: 50px;
+  margin: 50px 0;
   padding: 0;
   padding-top: 10px;
   font-size: 24px;
@@ -139,7 +164,7 @@ const Get = styled.p`
 `;
 
 const NullRecipes = styled.h3`
-  margin: 0;
+  margin: 75px 0;
   margin-top: 50px;
   padding: 0;
   padding-top: 10px;

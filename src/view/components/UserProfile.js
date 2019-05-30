@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Button from './Controllers/Button';
 import RecipesList from './RecipesList';
 
 const UserProfile = (props) => {
   const [user, setUser] = useState({
-    name: props.user.name,
-    email: props.user.email
+    name: '',
+    email: ''
   });
+
+  console.log(`this is props`, props);
 
   const [showCreatingRecipeForm, setShowCreatingRecipeForm] = useState(false);
 
   useEffect(() => {
-    props.getUserInfoByToken(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
+    props.getUserInfoByToken(token);
+    props.getUserRecipes(token);
   }, []);
 
   useEffect(() => {
@@ -36,15 +41,17 @@ const UserProfile = (props) => {
       <Title>Your profile</Title>
       <UserInfo>
         <Text>
-          Name: <span>{user.name}</span>
+          <Bold>Name</Bold>: {user.name}
         </Text>
         <Text>
-          E-mail: <span>{user.email}</span>
+          <Bold>E-mail</Bold>: {user.email}
         </Text>
       </UserInfo>
-      <button type="button" onClick={handleNewRecipe}>
+      <ButtonChange type="button">Change profile</ButtonChange>
+      <Button type="button" onClick={handleNewRecipe}>
         Add new recipe
-      </button>
+      </Button>
+      <RecipesTitle>Your Recipes</RecipesTitle>
       {/* <Background>
         <Form method="POST" onSubmit={handleSubmit}>
           <FormInput
@@ -79,6 +86,7 @@ UserProfile.propTypes = {
   recipes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   getUserInfoByToken: PropTypes.func.isRequired,
+  getUserRecipes: PropTypes.func.isRequired,
   createRecipe: PropTypes.func.isRequired
 };
 
@@ -115,7 +123,33 @@ const Title = styled.h2`
 
 const UserInfo = styled.div``;
 
-const Text = styled.p``;
+const Text = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+`;
+
+const Bold = styled.span`
+  font-weight: 500;
+`;
+
+const ButtonChange = styled(Button)`
+  margin-bottom: 7px;
+  color: #fff;
+  background: #33f19e;
+`;
+
+const RecipesTitle = styled.h3`
+  margin: 0;
+  margin-top: 35px;
+  margin-bottom: 15px;
+  padding: 0;
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 300;
+  text-align: center;
+  color: #000;
+`;
 
 const Background = styled.div`
   background-color: #00000085;
@@ -130,12 +164,6 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-// const Form = styled.form`
-//   width: 300px;
-//   height: 300px;
-//   background-color: #fff;
-// `;
 
 const Form = styled.form`
   background-color: #fff;

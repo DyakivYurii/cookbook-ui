@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getUserInfoByToken } from '../../store/user/actions';
-import { createRecipe } from '../../store/recipes/actions';
+import { createRecipe, getAllMyRecipes } from '../../store/recipes/actions';
 
 import Navigation from '../containers/Navigation';
 import UserProfile from '../components/UserProfile';
@@ -17,6 +17,7 @@ const Profile = (props) => {
         recipes={props.recipes}
         user={props.user}
         getUserInfoByToken={props.getUserInfoByToken}
+        getUserRecipes={props.getAllMyRecipes}
         createRecipe={props.createRecipe}
       />
       <Footer />
@@ -25,12 +26,11 @@ const Profile = (props) => {
 };
 
 Profile.propTypes = {
-  // user: PropTypes.object.isRequired,
   recipes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   getUserInfoByToken: PropTypes.func.isRequired,
-  createRecipe: PropTypes.func.isRequired
-  // getUserRecipes: PropTypes.func.isRequired
+  createRecipe: PropTypes.func.isRequired,
+  getAllMyRecipes: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -41,7 +41,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getUserInfoByToken, createRecipe }, dispatch);
+  return bindActionCreators(
+    { getUserInfoByToken, getAllMyRecipes, createRecipe },
+    dispatch
+  );
 };
 
 export default connect(

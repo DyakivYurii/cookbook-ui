@@ -72,9 +72,11 @@ const Wrapper = styled.section`
 const List = styled.ul`
   margin: 0;
   padding: 0;
+  padding: 0 15px;
   list-style: none;
 
   @media (min-width: 768px) {
+    padding: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

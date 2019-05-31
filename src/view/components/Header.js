@@ -60,12 +60,12 @@ const Wrapper = styled.header`
 `;
 
 const Searcher = styled.div`
-  margin-top: 35%;
+  margin-top: 55px;
   margin-bottom: 20%;
   text-align: center;
 
   @media (min-width: 500px) {
-    margin-top: 75px;
+    margin-top: 55px;
     margin-bottom: 45px;
   }
 

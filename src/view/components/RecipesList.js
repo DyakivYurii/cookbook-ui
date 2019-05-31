@@ -17,7 +17,7 @@ const RecipesList = (props) => {
 
   return (
     <Wrapper>
-      {props.recipes.recipes &&
+      {(props.recipes.recipes &&
         props.recipes.recipes.length &&
         props.recipes.recipes[0].id && (
           <List>
@@ -38,7 +38,8 @@ const RecipesList = (props) => {
               );
             })}
           </List>
-        )}
+        )) ||
+        null}
       {props.recipes.status === 'request' ? (
         <Get>Loading</Get>
       ) : props.recipes.recipes && props.recipes.recipes.length === 0 ? (

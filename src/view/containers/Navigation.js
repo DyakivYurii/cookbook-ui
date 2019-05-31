@@ -166,6 +166,7 @@ const DesctopItem = styled(Link)`
 `;
 
 const Mobile = styled.nav`
+  z-index: 100;
   position: absolute;
   top: 0;
   left: 0;

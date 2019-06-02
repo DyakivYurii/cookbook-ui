@@ -67,7 +67,6 @@ const Form = (props) => {
 
 SignIn.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-
   history: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   signIn: PropTypes.func.isRequired

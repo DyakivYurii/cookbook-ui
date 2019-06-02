@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 import Input from '../components/Controllers/Input';
 import Button from '../components/Controllers/Button';
 
-const SignUp = (props) => {
+const SignUp = ({ history, auth, signIn, clearAuthReducer, ...rest }) => {
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -22,15 +22,15 @@ const SignUp = (props) => {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    if (props.auth.status === 'sign-up-success') {
+    if (auth.status === 'sign-up-success') {
       setShowError(false);
-      props.clearAuthReducer();
-      return props.history.push(PATH.HOME);
+      clearAuthReducer();
+      return history.push(PATH.HOME);
     }
-    if (props.auth.status === 'sign-up-failure') {
+    if (auth.status === 'sign-up-failure') {
       setShowError(true);
     }
-  }, [props.auth]);
+  }, [auth.status, clearAuthReducer, history]);
 
   const handleInputChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -38,7 +38,7 @@ const SignUp = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.signUp(user);
+    signUp(user);
   };
 
   if (localStorage.getItem('token')) {

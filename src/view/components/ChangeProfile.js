@@ -5,8 +5,15 @@ import styled from 'styled-components';
 import Input from './Controllers/Input';
 import Button from './Controllers/Button';
 
-const ChangeProfile = (props) => {
-  const [user, setUser] = useState({
+const ChangeProfile = ({
+  user,
+  showForm,
+  closeForm,
+  updateForm,
+  updateUser,
+  setChangedUserInfo
+}) => {
+  const [userInfo, setUserInfo] = useState({
     name: '',
     email: ''
   });
@@ -17,32 +24,32 @@ const ChangeProfile = (props) => {
   const [showCreatingRecipeForm, setShowChangeProfileForm] = useState(false);
 
   useEffect(() => {
-    setUser({ name: props.user.name, email: props.user.email });
-    setShowChangeProfileForm(props.showForm);
-  }, [props.showForm]);
+    setUserInfo({ name: user.name, email: user.email });
+    setShowChangeProfileForm(showForm);
+  }, [showForm]);
 
   const handleCloseForm = (event) => {
     event.stopPropagation();
     if (event.target === overlayRef.current) {
       setShowChangeProfileForm(false);
-      props.closeForm();
+      closeForm();
     }
   };
 
   const handleButtonCloseForm = (event) => {
     setShowChangeProfileForm(false);
-    props.closeForm();
+    closeForm();
   };
 
   const handlePutUser = (event) => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+    setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
   };
 
   const validateUser = () => {
-    if (user.name.length < 3 || user.name.length > 30) {
+    if (userInfo.name.length < 3 || userInfo.name.length > 30) {
       setPutUserError(true);
       return false;
-    } else if (user.email.length < 3 || user.email.length > 40) {
+    } else if (userInfo.email.length < 3 || userInfo.email.length > 40) {
       setPutUserError(true);
       return false;
     } else {
@@ -54,10 +61,10 @@ const ChangeProfile = (props) => {
   const handlePutUserSubmit = (event) => {
     event.preventDefault();
     if (validateUser()) {
-      props.updateUser(localStorage.getItem('token'), { ...user });
+      updateUser(localStorage.getItem('token'), { ...user });
       setShowChangeProfileForm(false);
-      props.closeForm();
-      props.setChangedUserInfo(true);
+      closeForm();
+      setChangedUserInfo(true);
     }
   };
 
@@ -73,7 +80,7 @@ const ChangeProfile = (props) => {
           <Input
             inputType="formInput"
             type="text"
-            value={user.name}
+            value={userInfo.name}
             name="name"
             onChange={handlePutUser}
             placeholder="Name"
@@ -84,7 +91,7 @@ const ChangeProfile = (props) => {
           <Input
             inputType="formInput"
             type="text"
-            value={user.email}
+            value={userInfo.email}
             name="email"
             onChange={handlePutUser}
             placeholder="E-mail"

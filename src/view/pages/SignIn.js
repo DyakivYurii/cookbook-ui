@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 import Input from '../components/Controllers/Input';
 import Button from '../components/Controllers/Button';
 
-const SignIn = (props) => {
+const SignIn = ({ history, auth, signIn, clearAuthReducer, ...rest }) => {
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -21,15 +21,15 @@ const SignIn = (props) => {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    if (props.auth.status === 'sign-in-success') {
+    if (auth.status === 'sign-in-success') {
       setShowError(false);
-      props.clearAuthReducer();
-      return props.history.push(PATH.HOME);
+      clearAuthReducer();
+      return history.push(PATH.HOME);
     }
-    if (props.auth.status === 'sign-in-failure') {
+    if (auth.status === 'sign-in-failure') {
       setShowError(true);
     }
-  }, [props.auth]);
+  }, [auth, clearAuthReducer, history]);
 
   const handleInputChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -37,7 +37,7 @@ const SignIn = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.signIn(user);
+    signIn(user);
   };
 
   if (localStorage.getItem('token')) {
@@ -73,7 +73,9 @@ const SignIn = (props) => {
               minlength="3"
             />
             <ErrorText show={showError}>Bad value</ErrorText>
-            <SubmitButton type="submit">Sign In</SubmitButton>
+            <SubmitButton type="submit" data-testid="sign-in">
+              Sign In
+            </SubmitButton>
           </Form>
         </Container>
       </SectionContainer>
@@ -85,7 +87,8 @@ const SignIn = (props) => {
 SignIn.propTypes = {
   history: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  signIn: PropTypes.func.isRequired
+  signIn: PropTypes.func.isRequired,
+  clearAuthReducer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {

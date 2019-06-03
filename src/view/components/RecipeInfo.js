@@ -41,9 +41,12 @@ const RecipeInfo = (props) => {
     setShouldRedirect(true);
   };
 
+  console.log(`My props`, props.recipes);
+
   return (
     <Wrapper>
       {shouldRedirect ? <Redirect to={PATH.HOME} /> : null}
+      {props.recipes.status === 'request' && <Fetch>Loading</Fetch>}
       {props.recipes.recipes &&
         props.recipes.recipes.length &&
         props.recipes.recipes[0].recipe && (
@@ -123,6 +126,16 @@ const Wrapper = styled.div`
   @media (min-width: 992px) {
     width: 960px;
   }
+`;
+
+const Fetch = styled.p`
+  margin: 50px 0;
+  padding: 0;
+  padding-top: 10px;
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 300;
+  text-align: center;
 `;
 
 const Item = styled.div`

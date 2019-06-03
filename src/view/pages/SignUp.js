@@ -125,14 +125,19 @@ const SectionContainer = styled.div`
 
 const Container = styled.section`
   box-sizing: border-box;
-  width: 430px;
-  padding: 50px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 3px 5px 0 #30303035;
-  background-color: #fff;
+  padding: 0 15px
+  padding-top: 50px;
+
+  @media (min-width: 768px) {
+    width: 430px;
+    padding: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 3px 5px 0 #30303035;
+    background-color: #fff;
+  }
 `;
 
 const Title = styled.h2`

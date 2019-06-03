@@ -45,7 +45,6 @@ export default Header;
 
 const Wrapper = styled.header`
   position: relative;
-  max-height: 70vh;
   padding: 0 15px;
   background-color: #3fd4aa;
   border-bottom: 1px solid #3fd4aa;

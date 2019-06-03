@@ -50,11 +50,7 @@ const Navigation = (props) => {
 
         <Mobile>
           <Title open={navigationOpen}>Menu</Title>
-          <Burger
-            type="button"
-            onClick={changeNavigationState}
-            open={navigationOpen}
-          >
+          <Burger type="button" onClick={changeNavigationState}>
             <Icon open={navigationOpen} />
           </Burger>
           <List open={navigationOpen}>
@@ -199,9 +195,7 @@ const Title = styled.h2`
 const Burger = styled.button`
   position: absolute;
   right: 25px;
-  ${(props) => {
-    return props.open ? `top: 15px;` : `top: 20px;`;
-  }};
+  top: 15px;
   margin: 0;
   padding: 19px 0;
   width: 38px;
